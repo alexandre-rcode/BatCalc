@@ -1,0 +1,398 @@
+/* Reset básico e fontes */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+/* Cores do Tema Inspirado */
+:root {
+    --bg-dark-purple: #1a102a; /* Fundo principal escuro */
+    --container-dark-purple: #2a1a3a; /* Fundo container/header */
+    --border-subtle-purple: #4a3a5a; /* Bordas e linhas */
+    --text-primary: #f0f0f0; /* Texto principal (quase branco) */
+    --text-secondary: #c0b0d0; /* Texto secundário (lilás claro) */
+    --text-label: #d0c0e0; /* Labels dos inputs */
+    --text-placeholder: #8a7a9a; /* Dicas/placeholders */
+    --gradient-start: #4ac7ff; /* Azul Ciano */
+    --gradient-end: #e040fb; /* Magenta Vibrante */
+    --gradient-hover-start: #6ae0ff; /* Azul mais claro */
+    --gradient-hover-end: #f060fc; /* Magenta mais claro */
+    --result-value-color: var(--gradient-start); /* Resultado em Ciano */
+    --error-color: #ff6677; /* Vermelho para erros */
+    --input-bg: #1e1030; /* Fundo do input */
+    --focus-glow: rgba(224, 64, 251, 0.3); /* Brilho magenta no foco */
+    --icon-color: var(--gradient-end); /* Ícones em Magenta */
+}
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bg-dark-purple);
+    /* Adicionando gradiente sutil ao fundo */
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px), /* Pontos sutis */
+        linear-gradient(135deg, var(--bg-dark-purple) 0%, #25153a 100%); /* Gradiente diagonal */
+    background-size: 20px 20px, cover; /* Tamanho dos pontos e cobertura do gradiente */
+    color: var(--text-primary);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* --- Estilos Homepage --- */
+.homepage-body {
+    align-items: center;
+}
+
+.homepage-container {
+    background-color: var(--container-dark-purple);
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 700px;
+    border: 1px solid var(--border-subtle-purple);
+    text-align: center;
+}
+
+.homepage-header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-subtle-purple);
+    padding-bottom: 20px;
+}
+
+.homepage-header .icon {
+    color: var(--icon-color); /* Cor do ícone principal */
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.homepage-header h1 {
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.homepage-header p {
+    color: var(--text-secondary);
+    font-size: 1.1em;
+}
+
+.intro-section {
+    margin-bottom: 40px;
+}
+
+.intro-section h2 {
+    color: var(--text-primary);
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.intro-section p {
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.calculator-choice {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.choice-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #ffffff; /* Texto do botão sempre branco */
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 500;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    width: 80%;
+    max-width: 350px;
+    gap: 10px;
+    border: none; /* Remover borda padrão */
+    /* Aplicando gradiente */
+    background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.choice-button i {
+    font-size: 1.2em;
+}
+
+.choice-button:hover {
+    transform: translateY(-3px) scale(1.03); /* Efeito de levantar sutil */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    /* Gradiente mais claro no hover */
+    background: linear-gradient(90deg, var(--gradient-hover-start) 0%, var(--gradient-hover-end) 100%);
+}
+
+/* Estilos específicos podem ser removidos se o gradiente principal servir para ambos */
+/* .lithium-button { ... } */
+/* .stationary-button { ... } */
+
+.homepage-footer {
+    margin-top: 40px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-subtle-purple);
+    font-size: 0.9em;
+    color: var(--text-placeholder);
+}
+
+/* --- Estilos Páginas Calculadoras --- */
+.calculator-page-container {
+    width: 100%;
+    max-width: 650px;
+}
+
+.calculator-header {
+    background-color: var(--container-dark-purple);
+    padding: 20px 30px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-subtle-purple);
+    border-bottom: none;
+    margin-bottom: 0;
+    text-align: center;
+    position: relative;
+}
+
+.calculator-header .icon {
+     color: var(--icon-color);
+     font-size: 1.5em;
+     margin-right: 8px;
+     vertical-align: middle;
+}
+
+.calculator-header h1 {
+     color: var(--text-primary);
+     font-weight: 700;
+     font-size: 1.6em;
+     margin-bottom: 5px;
+     display: inline-block;
+     vertical-align: middle;
+}
+
+.calculator-header p {
+    color: var(--text-secondary);
+    font-size: 0.95em;
+}
+
+.back-button {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1.2em;
+    padding: 5px 8px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.back-button:hover {
+    color: var(--text-primary);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.calculator-content {
+    background-color: var(--container-dark-purple);
+    padding: 30px 40px;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-subtle-purple);
+    border-top: none;
+}
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-label);
+    font-size: 0.95em;
+}
+
+.input-group input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-subtle-purple);
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+.input-group input[type="number"]:focus {
+    outline: none;
+    border-color: var(--gradient-end); /* Borda magenta no foco */
+    box-shadow: 0 0 0 3px var(--focus-glow); /* Brilho magenta */
+}
+
+.input-group small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: var(--text-placeholder);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    color: #ffffff; /* Texto sempre branco para contraste */
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, var(--gradient-hover-start) 0%, var(--gradient-hover-end) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+button[type="submit"]:active {
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.result-area {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--input-bg); /* Fundo escuro para resultado */
+    border-radius: 8px;
+    border: 1px solid var(--border-subtle-purple);
+    text-align: center;
+}
+
+.result-area p {
+    margin: 8px 0;
+    font-size: 1.05em;
+}
+
+.result-area .label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.result-area .value {
+    font-weight: 700;
+    font-size: 1.4em;
+    color: var(--result-value-color); /* Cor do resultado principal (ciano) */
+    display: block;
+    margin-top: 5px;
+}
+
+.result-area hr {
+     border: 0;
+     height: 1px;
+     background-color: var(--border-subtle-purple);
+     margin: 15px 0;
+}
+
+
+.result-area .error {
+    color: var(--error-color);
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.explanation {
+     margin-top: 30px;
+     padding-top: 20px;
+     border-top: 1px solid var(--border-subtle-purple);
+}
+
+.explanation h3 {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.explanation p {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+    font-size: 0.95em;
+}
+
+.disclaimer {
+    font-size: 0.85em !important;
+    color: var(--text-placeholder) !important;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* --- Media Queries (sem mudanças, apenas herdam as novas cores) --- */
+@media (min-width: 600px) {
+    .calculator-choice {
+        flex-direction: row;
+        justify-content: center;
+    }
+     .choice-button {
+        width: auto;
+    }
+}
+
+@media (max-width: 700px) {
+    .calculator-page-container, .homepage-container {
+         max-width: 95%;
+         padding: 20px;
+    }
+     .calculator-header { padding: 15px 20px; }
+     .calculator-content { padding: 20px; }
+     .homepage-header h1 { font-size: 1.8em; }
+     .homepage-header p { font-size: 1em; }
+     .intro-section h2 { font-size: 1.3em; }
+     .intro-section p { font-size: 1em; }
+     .choice-button { font-size: 1em; padding: 12px 20px; }
+     .calculator-header h1 { font-size: 1.4em; }
+     .calculator-header p { font-size: 0.9em; }
+     .back-button { left: 15px; font-size: 1em; }
+     .explanation p { font-size: 0.9em; }
+     button[type="submit"] { padding: 12px; font-size: 1em; }
+     .result-area p { font-size: 1em; }
+     .result-area .value { font-size: 1.2em; }
+}
+
+@media (max-width: 400px) {
+    .calculator-header h1 { font-size: 1.2em; }
+    .calculator-header .icon { display: none; }
+    .back-button { top: 20px; transform: none; }
+}
