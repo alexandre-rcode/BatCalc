@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="description" content="Calcule a autonomia de baterias estacionárias (12V em strings de 48V). Insira quantidade total e consumo para estimar.">
+    <title>Calculadora - Baterias Estacionárias</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link para o NOVO style.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- CÓDIGO DO ADSENSE (Manter se necessário) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6032091817440859"
+         crossorigin="anonymous"></script>
+    <!-- FIM DO CÓDIGO DO ADSENSE -->
+</head>
+<body>
+     <div class="calculator-page-container">
+         <header class="calculator-header">
+             <a href="index.html" class="back-button"><i class="fas fa-arrow-left"></i> Voltar</a>
+            <h1><i class="fas fa-car-battery icon"></i> Calculadora de Autonomia - Estacionária</h1>
+             <p>Para sistemas com baterias 12V (63Ah/string) em arranjos de 48V.</p>
+         </header>
+
+        <div class="calculator-content">
+            <form id="autonomy-form-estacionaria">
+                <div class="input-group">
+                    <label for="num-batteries-total">Quantidade Total de Baterias (12V):</label>
+                    <input type="number" id="num-batteries-total" name="num-batteries-total" placeholder="Ex: 8" step="4" min="4" required>
+                    <small>Número total de baterias de 12V no sistema (deve ser múltiplo de 4).</small>
+                </div>
+
+                <div class="input-group">
+                    <label for="avg-consumption-est">Consumo Médio do Sistema (A):</label>
+                    <input type="number" id="avg-consumption-est" name="avg-consumption-est" placeholder="Ex: 15" step="any" required>
+                    <small>Corrente média total consumida pelo sistema em 48V.</small>
+                </div>
+
+                <button type="submit">Calcular Autonomia</button>
+            </form>
+
+            <div id="result-area-estacionaria" class="result-area" style="display: none;">
+                 <!-- Resultado do JS estacionaria.js -->
+            </div>
+
+             <section class="content-section explanation">
+                <h3>Entendendo o Cálculo (Estacionária)</h3>
+                <p>Este cálculo assume que as baterias de 12V estão agrupadas em <strong>strings de 4 baterias em série</strong> (formando 48V). Cada string contribui com uma capacidade nominal (assumida aqui como <strong>63Ah</strong> baseado no exemplo). A capacidade total é a soma da capacidade de cada string.</p>
+                 <p>Para baterias estacionárias (chumbo-ácido), a profundidade de descarga (DoD) recomendada para maior vida útil é frequentemente de 50%. Portanto, esta calculadora aplica um fator de <strong>50%</strong> à capacidade nominal total para estimar a capacidade útil.</p>
+                <p>A autonomia é então estimada dividindo a capacidade útil pelo consumo médio informado.</p>
+                <p class="disclaimer">Este cálculo é uma estimativa baseada em parâmetros comuns. A capacidade real por string (63Ah) e a DoD ideal (50%) podem variar. Consulte as especificações do fabricante e as condições de uso.</p>
+            </section>
+        </div>
+    </div>
+    <script src="estacionaria.js" defer></script>
+</body>
+</html>
