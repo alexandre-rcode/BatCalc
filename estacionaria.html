@@ -56,15 +56,15 @@
              <section class="content-section explanation">
                 <h3>Entendendo o Cálculo (Estacionária)</h3>
                 <p>Este cálculo assume que as baterias de 12V estão agrupadas em <strong>strings de 4 baterias em série</strong> (formando 48V). Cada string contribui com uma capacidade nominal (assumida aqui como <strong>63Ah</strong>). A capacidade total é a soma da capacidade de cada string.</p>
-                 <p>Para baterias estacionárias, a profundidade de descarga (DoD) recomendada para maior vida útil é frequentemente de 50%. Portanto, esta calculadora aplica um fator de <strong>50%</strong> à capacidade nominal total para estimar a capacidade útil.</p>
-                 <p>O consumo total considerado é a <strong>soma dos consumos da Fonte 01 e Fonte 02</strong> informados.</p>
+                <!-- ========================== ALTERAÇÃO AQUI ========================== -->
+                <p>Para estimar a capacidade útil, esta calculadora aplica um fator de profundidade de descarga (DoD) de <strong>80%</strong> à capacidade nominal total, conforme solicitado.</p>
+                <!-- ================================================================== -->
+                <p>O consumo total considerado é a <strong>soma dos consumos da Fonte 01 e Fonte 02</strong> informados.</p>
                 <p>A autonomia é então estimada dividindo a capacidade útil pelo consumo total.</p>
-                <p class="disclaimer">Este cálculo é uma estimativa baseada em parâmetros comuns. A capacidade real por string (63Ah) e a DoD ideal (50%) podem variar. Consulte as especificações do fabricante e as condições de uso.</p>
+                <p class="disclaimer">Este cálculo é uma estimativa baseada em parâmetros comuns. A capacidade real por string (63Ah) e a DoD ideal (80%) podem variar. Consulte as especificações do fabricante e as condições de uso.</p>
             </section>
         </div>
     </div>
-    <script src="estacionaria.js" defer></script> <!-- Link correto para o JS -->
-</body>
-</html>
+    <script src="estacionaria.js" defer></script>
 </body>
 </html>
