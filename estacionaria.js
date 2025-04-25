@@ -7,20 +7,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const autonomyForm = document.getElementById('autonomy-form-estacionaria');
     const resultArea = document.getElementById('result-area-estacionaria');
 
-    // Inputs
+    // Inputs - Pegando os IDs CORRETOS do HTML acima
     const numBatteriesTotalInput = document.getElementById('num-batteries-total');
-    // === NOVOS INPUTS DE CONSUMO ===
-    const consumptionInputF1 = document.getElementById('consumption-f1');
-    const consumptionInputF2 = document.getElementById('consumption-f2');
-    // ==============================
+    const consumptionInputF1 = document.getElementById('consumption-f1'); // Input Fonte 1
+    const consumptionInputF2 = document.getElementById('consumption-f2'); // Input Fonte 2
 
-    if (!autonomyForm) return; // Sai se o formulário não existir nesta página
+    // Verifica se o formulário existe nesta página antes de adicionar o listener
+    if (!autonomyForm) {
+        console.error("Formulário 'autonomy-form-estacionaria' não encontrado.");
+        return;
+    }
+    // Verifica se os inputs existem
+     if (!numBatteriesTotalInput || !consumptionInputF1 || !consumptionInputF2 || !resultArea) {
+        console.error("Um ou mais elementos do formulário/resultado não foram encontrados.");
+        return;
+    }
+
 
     autonomyForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+        event.preventDefault(); // Impede o envio padrão
 
-        resultArea.innerHTML = '';
-        resultArea.style.display = 'none';
+        resultArea.innerHTML = ''; // Limpa resultado anterior
+        resultArea.style.display = 'none'; // Esconde resultado anterior
 
         // Obter valores dos inputs
         const totalBatteries = parseInt(numBatteriesTotalInput.value, 10);
@@ -30,14 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let errorMessage = '';
         let invalidInput = null;
 
-        // Validação
+        // Validação dos inputs
         if (isNaN(totalBatteries) || totalBatteries <= 0) {
             errorMessage = 'Quantidade total de baterias inválida (deve ser > 0).';
             invalidInput = numBatteriesTotalInput;
         } else if (totalBatteries % BATTERIES_PER_STRING !== 0) {
              errorMessage = `A quantidade total de baterias (${totalBatteries}) deve ser um múltiplo de ${BATTERIES_PER_STRING} para formar strings de 48V.`;
              invalidInput = numBatteriesTotalInput;
-        // === VALIDAÇÃO DOS NOVOS INPUTS ===
         } else if (isNaN(consumptionF1) || consumptionF1 < 0) { // Permite 0, mas não negativo
             errorMessage = 'Consumo Fonte 01 inválido (deve ser >= 0).';
             invalidInput = consumptionInputF1;
@@ -45,32 +52,44 @@ document.addEventListener('DOMContentLoaded', () => {
             errorMessage = 'Consumo Fonte 02 inválido (deve ser >= 0).';
             invalidInput = consumptionInputF2;
         }
-        // ====================================
 
-        // Se não houve erro até aqui, calcula o consumo total
+        // Se não houve erro de validação, calcula o consumo total
         let totalConsumption = NaN;
         if (!errorMessage) {
              totalConsumption = consumptionF1 + consumptionF2; // SOMA OS DOIS CONSUMOS
+
+             // Verifica se a soma é zero APÓS somar
              if (totalConsumption === 0) {
                  errorMessage = 'Com consumo total zero (0 A), a autonomia é teoricamente infinita.';
-                 invalidInput = consumptionInputF1; // Foca no primeiro campo de consumo
+                 // Decide em qual campo focar se o total for zero (pode ser o primeiro)
+                 invalidInput = consumptionInputF1;
+             } else if (totalConsumption < 0) {
+                 // Caso raro, mas se a soma der negativa (inputs negativos não validados antes?)
+                 errorMessage = 'O consumo total calculado é negativo, verifique os valores das fontes.';
+                 invalidInput = consumptionInputF1;
              }
         }
 
-        // Exibe erro se houver
+        // Exibe erro se houver e interrompe
         if (errorMessage) {
             resultArea.innerHTML = `<p class="error">${errorMessage}</p>`;
             resultArea.style.display = 'block';
-            if (invalidInput) invalidInput.focus();
+            if (invalidInput) { // Foca no campo inválido
+                invalidInput.focus();
+            }
             resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            return;
+            return; // Interrompe a execução aqui
         }
 
-        // Cálculos Principais (agora usando totalConsumption)
+        // --- Se chegou aqui, todos os inputs são válidos e a soma é > 0 ---
+
+        // Cálculos Principais (usando totalConsumption)
         const numStrings = totalBatteries / BATTERIES_PER_STRING;
         const totalNominalCapacity = numStrings * CAPACITY_PER_STRING_AH;
         const usableCapacity = totalNominalCapacity * USABLE_CAPACITY_FACTOR_STATIONARY;
-        const autonomyHoursDecimal = usableCapacity / totalConsumption; // Usa a SOMA
+
+        // Calcula autonomia (agora podemos dividir com segurança)
+        const autonomyHoursDecimal = usableCapacity / totalConsumption;
 
         // Formatação do Tempo
         const totalMinutes = Math.floor(autonomyHoursDecimal * 60);
@@ -91,13 +110,18 @@ document.addEventListener('DOMContentLoaded', () => {
         resultArea.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 
-     // Limpar resultado ao mudar inputs (ATUALIZADO)
-     [numBatteriesTotalInput, consumptionInputF1, consumptionInputF2].forEach(input => { // Inclui os dois novos inputs
-        input?.addEventListener('input', () => {
-            if (resultArea.style.display !== 'none') {
-                 resultArea.style.display = 'none';
-                 resultArea.innerHTML = '';
-            }
-        });
+     // Limpar resultado ao mudar inputs (INCLUI OS NOVOS INPUTS)
+     [numBatteriesTotalInput, consumptionInputF1, consumptionInputF2].forEach(input => {
+        // Adiciona verificação extra para garantir que input não é null
+        if(input) {
+            input.addEventListener('input', () => {
+                if (resultArea.style.display !== 'none') {
+                     resultArea.style.display = 'none';
+                     resultArea.innerHTML = '';
+                }
+            });
+        } else {
+            console.warn("Um elemento de input não foi encontrado ao adicionar listener.");
+        }
      });
 });
