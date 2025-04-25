@@ -21,23 +21,6 @@ Uma ferramenta web simples e prática para calcular a autonomia estimada de sist
 *   **Design Responsivo:** Adaptável a diferentes tamanhos de tela (desktop, tablet, mobile).
 *   **Tema Moderno:** Interface com cores e gradientes inspirados em designs atuais.
 
-## 📸 Demonstração (Prévia)
-
-*(**Importante:** Insira aqui um screenshot ou GIF da calculadora rodando localmente!)*
-
-## 🚀 Como Usar (Localmente)
-
-1.  **Clone o repositório:**
-    ```bash
-    git clone https://github.com/{SEU_USUARIO_GITHUB}/{SEU_REPOSITORIO}.git
-    ```
-2.  **Navegue até a pasta do projeto:**
-    ```bash
-    cd {SEU_REPOSITORIO}
-    ```
-3.  **Abra o arquivo `index.html`** diretamente no seu navegador web preferido (Chrome, Firefox, Edge, etc.).
-4.  Navegue pela aplicação e utilize as calculadoras.
-
 ## 🛠️ Tecnologias Utilizadas
 
 *   HTML5
