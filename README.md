@@ -1,6 +1,5 @@
 # 🔋 Calculadora de Autonomia de Baterias
 
-*(Status do Deploy será adicionado após publicação)*
 <!-- [![Netlify Status](https://api.netlify.com/api/v1/badges/{ID_DO_BADGE_NETLIFY}/deploy-status)](https://app.netlify.com/sites/{SEU_SITE_NETLIFY}/deploys) -->
 
 Uma ferramenta web simples e prática para calcular a autonomia estimada de sistemas de baterias de **Lítio** e **Estacionárias (Chumbo-Ácido)**. Ideal para auxiliar no planejamento de sistemas de energia, veículos recreativos (motorhomes, trailers), barcos, nobreaks e diversos projetos DIY.
@@ -26,8 +25,6 @@ Uma ferramenta web simples e prática para calcular a autonomia estimada de sist
 
 *(**Importante:** Insira aqui um screenshot ou GIF da calculadora rodando localmente!)*
 
-![Screenshot da Calculadora](link_para_sua_imagem.png)
-
 ## 🚀 Como Usar (Localmente)
 
 1.  **Clone o repositório:**
@@ -46,11 +43,8 @@ Uma ferramenta web simples e prática para calcular a autonomia estimada de sist
 *   HTML5
 *   CSS3 (com Variáveis CSS e Flexbox)
 *   JavaScript (Vanilla JS - ES6+)
-*   [Font Awesome](https://fontawesome.com/) (para ícones)
 
 ## 🌐 Próximos Passos: Deploy
-
-Este projeto está pronto para ser hospedado em uma plataforma de sites estáticos como [Netlify](https://www.netlify.com/), [Vercel](https://vercel.com/), ou [GitHub Pages](https://pages.github.com/).
 
 Após o deploy, o link para a versão online e o status do build serão adicionados a este README.
 
@@ -59,7 +53,5 @@ Após o deploy, o link para a versão online e o status do build serão adiciona
 Contribuições são bem-vindas! Se encontrar algum problema ou tiver sugestões de melhoria, sinta-se à vontade para abrir uma **Issue** ou enviar um **Pull Request**.
 
 ## 📄 Licença
-
-Este projeto é distribuído sob a Licença MIT. Veja o arquivo `LICENSE` (se incluído) para mais detalhes ou consulte a [Licença MIT](https://opensource.org/licenses/MIT).
 
 ---
