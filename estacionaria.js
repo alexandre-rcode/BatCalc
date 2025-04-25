@@ -2,27 +2,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Parâmetros para cálculo Estacionário
     const BATTERIES_PER_STRING = 4;
     const CAPACITY_PER_STRING_AH = 63; // Conforme exemplo do usuário
-    const USABLE_CAPACITY_FACTOR_STATIONARY = 0.50; // 50% DoD recomendado para chumbo-ácido
+    // ========================== ALTERAÇÃO AQUI ==========================
+    const USABLE_CAPACITY_FACTOR_STATIONARY = 0.80; // 80% DoD (conforme solicitado)
+    // ==================================================================
 
     const autonomyForm = document.getElementById('autonomy-form-estacionaria');
     const resultArea = document.getElementById('result-area-estacionaria');
 
-    // Inputs - Pegando os IDs CORRETOS do HTML acima
+    // Inputs - Pegando os IDs CORRETOS do HTML
     const numBatteriesTotalInput = document.getElementById('num-batteries-total');
     const consumptionInputF1 = document.getElementById('consumption-f1'); // Input Fonte 1
     const consumptionInputF2 = document.getElementById('consumption-f2'); // Input Fonte 2
 
     // Verifica se o formulário existe nesta página antes de adicionar o listener
     if (!autonomyForm) {
-        console.error("Formulário 'autonomy-form-estacionaria' não encontrado.");
+        // console.error("Formulário 'autonomy-form-estacionaria' não encontrado.");
         return;
     }
     // Verifica se os inputs existem
      if (!numBatteriesTotalInput || !consumptionInputF1 || !consumptionInputF2 || !resultArea) {
-        console.error("Um ou mais elementos do formulário/resultado não foram encontrados.");
+        console.error("Um ou mais elementos do formulário/resultado não foram encontrados em estacionaria.html.");
         return;
     }
-
 
     autonomyForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Impede o envio padrão
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                  // Decide em qual campo focar se o total for zero (pode ser o primeiro)
                  invalidInput = consumptionInputF1;
              } else if (totalConsumption < 0) {
-                 // Caso raro, mas se a soma der negativa (inputs negativos não validados antes?)
+                 // Caso raro, mas se a soma der negativa
                  errorMessage = 'O consumo total calculado é negativo, verifique os valores das fontes.';
                  invalidInput = consumptionInputF1;
              }
@@ -83,10 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Se chegou aqui, todos os inputs são válidos e a soma é > 0 ---
 
-        // Cálculos Principais (usando totalConsumption)
+        // Cálculos Principais (agora usando USABLE_CAPACITY_FACTOR_STATIONARY = 0.80)
         const numStrings = totalBatteries / BATTERIES_PER_STRING;
         const totalNominalCapacity = numStrings * CAPACITY_PER_STRING_AH;
-        const usableCapacity = totalNominalCapacity * USABLE_CAPACITY_FACTOR_STATIONARY;
+        const usableCapacity = totalNominalCapacity * USABLE_CAPACITY_FACTOR_STATIONARY; // <= AQUI USA O VALOR ATUALIZADO
 
         // Calcula autonomia (agora podemos dividir com segurança)
         const autonomyHoursDecimal = usableCapacity / totalConsumption;
@@ -96,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
 
-        // Exibição do Resultado
+        // Exibição do Resultado (a % exibida aqui também será atualizada automaticamente)
         resultArea.innerHTML = `
             <p><span class="label">Nº de Strings (4x12V):</span> ${numStrings}</p>
             <p><span class="label">Capacidade Total Nominal (${numStrings} x ${CAPACITY_PER_STRING_AH}Ah):</span> ${totalNominalCapacity.toFixed(1)} Ah</p>
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         } else {
-            console.warn("Um elemento de input não foi encontrado ao adicionar listener.");
+            // console.warn("Um elemento de input não foi encontrado ao adicionar listener em estacionaria.js.");
         }
      });
 });
